@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ExamensArbete.Models.Category> //list of categories hast pas IEnumerable estefadeh mishe
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+
+<div class="row">
+    <div class="col-md-9">
+        <h3>Category List</h3>
+    </div>
+    <div class="col-md-3">
+        <a onclick="Create()" class="btn btn-primary btn-sm">Add new Category</a>
+    </div>
+</div>
+
+
+<table class="table table-striped">
+    <tr>
+        <th>#</th>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Language</th>
+        <th>Action</th>
+    </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@(++i)</td>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td>@item.Language.Name</td>
+                <td colspan="3">
+
+                    <a onclick="Edit(@item.Id)"   class="btn btn-success btn-sm"> Edit  </a>
+                    <a onclick="Delete(@item.Id)" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<partial name="_PartialModal" />
+
+
+@section Scripts{
+    <script>
+        function Create()
+        {
+            $.get("/Admin/Category/Create", function (data) {
+
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("Create a new Category");
+                $("#myModalBodyId").html(data);
+            })
+        };
+
+        function Delete(id) 
+        {
+            $.get("/Admin/Category/Delete/" + id, function (data) {
+
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("Delete Category");
+                $("#myModalBodyId").html(data);
+            })
+        };
+
+        function Edit(id)
+        {
+            $.get("/Admin/Category/Edit/" + id, function (data) 
+            {
+
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("Delete Category");
+                $("#myModalBodyId").html(data);
+            })
+        };
+
+        function Edit(id) 
+        {
+            $.get("/Admin/Category/Edit/" + id, function (data) 
+            {
+
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("Edit Category");
+                $("#myModalBodyId").html(data);
+            })
+        };
+    </script>
+
+    
+}
+

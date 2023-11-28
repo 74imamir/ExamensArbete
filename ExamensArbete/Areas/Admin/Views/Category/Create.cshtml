@@ -1,0 +1,27 @@
+﻿@model ExamensArbete.Models.Category
+
+
+<form action="/Admin/Category/Create" method="post">
+
+
+        <div class="col-md-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="Name" class="control-lable"></label>
+            <input asp-for="Name" class="form-control" autocomplete="off" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <div class="col-md-12">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <label asp-for="LanguageId" class="control-lable"></label>
+            <Select asp-for="LanguageId" class="form-control" asp-items="ViewBag.LanguageId"></Select>
+
+        </div>
+        <br />
+        <div class="col-md-12">
+
+            <input type="submit" value="Save" class="btn btn-primary form-control"/>
+        </div>
+
+
+</form>
+

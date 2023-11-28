@@ -1,0 +1,16 @@
+﻿@model ExamensArbete.Models.Category
+
+
+<h1 class="text-danger">Are you sure ?</h1>
+<div>@Model.Name</div>
+
+<br />
+
+
+<form asp-action="Delete">
+    <input type="hidden" value="@Model.Id" />
+
+
+    <input type="submit" value="Delete" class="btn btn-danger form-control" />
+
+</form>

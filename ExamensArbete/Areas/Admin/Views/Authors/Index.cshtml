@@ -1,0 +1,117 @@
+﻿@model IEnumerable<ExamensArbete.Models.Author>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<a onclick="Create()" class="btn btn-primary">Create New</a>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.lastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Facebook)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Twitter)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.lastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Facebook)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Twitter)
+                </td>
+                <td>
+                    <a onclick="Edit(@item.Id)" class="btn btn-success" >Edit</a> |
+                    <a onclick="Details(@item.Id)" class="btn btn-info" >Details</a> |
+                    <a onclick="Delete(@item.Id)"   class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<partial name="_PartialModal" />
+
+@section Scripts{
+    <script>
+        function Create() {
+            $.get("/Admin/Authors/Create", function (data) {
+
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("Create a new Author");
+                $("#myModalBodyId").html(data);
+            })
+        };
+
+        function Delete(id) {
+            $.get("/Admin/Authors/Delete/" + id, function (data) {
+
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("Delete Athor");
+                $("#myModalBodyId").html(data);
+            })
+        };
+
+        function Edit(id) {
+            $.get("/Admin/Authors/Edit/" + id, function (data) {
+
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("Edit Author");
+                $("#myModalBodyId").html(data);
+            })
+        };
+
+        function Details(id) {
+            $.get("/Admin/Authors/Details/" + id, function (data) {
+
+                $("#myModalId").modal("show");
+                $("#myModalTitleId").html("Details Athor");
+                $("#myModalBodyId").html(data);
+            })
+        };
+    </script>
+}
