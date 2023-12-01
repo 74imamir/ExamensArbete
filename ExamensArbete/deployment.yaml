@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: examensarbete-deployment
+spec:
+  replicas: 3 # Set the number of replicas based on your requirements
+  selector:
+    matchLabels:
+      app: examensarbete
+  template:
+    metadata:
+      labels:
+        app: examensarbete
+    spec:
+      containers:
+        - name: examensarbete-container
+          image: examensarbete-image:latest
+          ports:
+            - containerPort: 80
